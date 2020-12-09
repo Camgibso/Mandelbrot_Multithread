@@ -1,8 +1,6 @@
 Mini-project 4
 ============
 
-**Due: Oct. 30, 2020 by 11:59 PM US Central Time**.
-
 This mini-project will allow you to get more experience using threads to parallelize an expensive computation (this mini-project is based on an assignment here: http://www3.nd.edu/~cpoellab/teaching/cse30341/project3.html).
 
 To study concurrency, we need tasks that are computationally expensive. This mini-project uses mandelbrot sets, which are computationally expensive to generate. You can learn more about mandelbrot sets at http://www.math.utah.edu/~pa/math/mandelbrot/mandelbrot.html. The set is interesting both mathematically and aesthetically because it has an infinitely recursive structure. You can zoom into any part and find swirls, spirals, snowflakes, and other fun structures, as long as you are willing to do enough computation. For example, here are three images starting from the entire set and zooming in (you will have to compile the code available in the repository.):
@@ -151,51 +149,7 @@ Write a short report.
 -   Explain the shape of the two curves. What is the optimal number of
     threads? Why do curves A and B have a different shape? (Hint: modify
     your program to print a message when each thread starts and stops)
-	
-## Hints
 
-`mandel.c` uses the standard `getopt` routine to process command line
-arguments. To add the `-n` argument, you will need to add `n:` to the
-third argument of `getopt`, add an additional case statement underneath,
-and update the help text.
-
-Where `main` previously made one call to `compute_image`, you will need
-to modify it to create N threads with `pthread_create`, assign each to
-create one slice of the image, and then wait for each to complete with
-`pthread_join`.
-
-`pthread_create` requires that each thread begin executing a function
-that only takes one pointer argument. Unfortunately, `compute_image`
-takes a whole bunch of arguments. What you will need to do is modify
-`create_image` from this:
-
-```
-    void compute_image(struct bitmap *b, double xmin, double xmax, double ymin, 
-    double ymax, double itermax);
-```
-to this:
-   
-```
-   void * compute_image(struct thread_args *args)
-```
-
-where `thread_args` contains everything that you want to pass to
-`compute_image`. Now, for each thread, allocate a `thread_args`
-structure and pass it as the fourth argument to `pthread_create`, which
-will turn around and pass it to `compute_image`.
-Pthreads requires `compute_image` to return a `void *`, but since it
-doesn't actually need to return any data, just `return 0;` at the end of
-the function.
-
-If you need to construct a string, look at the man pages of the
-`sprintf` function, which is like `printf`, but puts the result in a
-string. For example you can use this to create a string that includes a
-floating point number to use as the `-s` argument:
-
-```
-    char command[256];
-    sprintf(command, "./mandel -x -.5 -y .5 -m 2000 -s %lf", zoom);
-```
 
 ## Tasks
 
@@ -204,12 +158,3 @@ floating point number to use as the `-s` argument:
 * Evenly divide the rows of the image between the threads. If the number of rows is not evenly divisible by the number of threads, give one thread more rows than the rest (and give the rest an equal number of rows).
 * Measure and graph the execution times for the two experiemental setups described above.
 * Explain the shape of the two curves, state what the optimal number of threads appears to be, and explain why curves A and B have a different shape.
-
-
-## Evaluation
-
-Your mini-project will be graded according to the following criteria:
-
-- **20 points** for each of the five tasks above.
-
-
