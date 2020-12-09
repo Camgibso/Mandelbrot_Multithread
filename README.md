@@ -1,6 +1,3 @@
-Mini-project 4
-============
-
 This mini-project will allow you to get more experience using threads to parallelize an expensive computation (this mini-project is based on an assignment here: http://www3.nd.edu/~cpoellab/teaching/cse30341/project3.html).
 
 To study concurrency, we need tasks that are computationally expensive. This mini-project uses mandelbrot sets, which are computationally expensive to generate. You can learn more about mandelbrot sets at http://www.math.utah.edu/~pa/math/mandelbrot/mandelbrot.html. The set is interesting both mathematically and aesthetically because it has an infinitely recursive structure. You can zoom into any part and find swirls, spirals, snowflakes, and other fun structures, as long as you are willing to do enough computation. For example, here are three images starting from the entire set and zooming in (you will have to compile the code available in the repository.):
