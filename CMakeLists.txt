@@ -1,0 +1,5 @@
+cmake_minimum_required (VERSION 2.6)
+project(mandel)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c99 -g")
+add_executable(mandel mandel.c bitmap.c)
+target_link_libraries(mandel pthread)
