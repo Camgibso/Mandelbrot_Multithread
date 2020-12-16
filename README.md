@@ -154,4 +154,4 @@ Write a short report.
 * Modify the existing `compute_image` function in `mandel.c` so that it takes a single pointer to a `struct thread_args`  (as described above). Use this new `compute_image` function as the function pointer argument to `pthread_create` for your multi-threaded implementation.
 * Evenly divide the rows of the image between the threads. If the number of rows is not evenly divisible by the number of threads, give one thread more rows than the rest (and give the rest an equal number of rows).
 * Measure and graph the execution times for the two experiemental setups described above.
-* Explain the shape of the two curves, state what the optimal number of threads appears to be, and explain why curves A and B have a different shape.
+* Explain the shape of the two curves, state what the optimal number of threads appears to be, and explain why curves A and B have a different shape
